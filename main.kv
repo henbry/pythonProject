@@ -1,0 +1,109 @@
+Screen:
+    ScreenManager:
+        id: sm
+        MenuScreen:
+            id: ms
+            name: "menu"
+        LoginScreen:
+            id: ls
+            name: "login"
+        ProfileScreen:
+            id: ps
+            name: "profile"
+
+<ContentScreen>
+    size_hint_y: None
+    height: '300sp'
+    BoxLayout:
+        orientation:'vertical'
+        ScrollView:
+            MDList:
+                cols: 1
+                id: panel_container
+                #size_hint: 1,1
+<TableScreen>
+    size_hint_y: None
+    height: '300sp'
+    adaptive_height: True
+    MDCard:
+        orientation: 'vertical'
+        padding: '15dp'
+        spacing: '10dp'
+        md_bg_color: [0.419, .725, 0.941, 0.7]
+        radius: [16, ]
+        size_hint_y: 1
+        MDBoxLayout:
+            ScrollView:
+                MDList:
+                    cols:1
+                    id: card
+                    padding: 0
+                    size_hint: 1,1
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            id: toolbar
+            elevation: 6
+            title: "Ripetizioni"
+            MDRaisedButton:
+                text: "Login"
+                pos_hint: {"center_x": .1, "center_y": .5}
+                size_hint_x: .5
+                md_bg_color: 0, 1, 1, .3
+                on_release: root.manager.current = 'login'
+        MDBottomNavigation:
+            MDBottomNavigationItem:
+                name: 'screen 2'
+                text: 'Recipe'
+                icon: 'food'
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: "10dp"
+                    size_hint_y: 0.9
+                    ScrollView:
+                        MDList:
+                            id: rlist
+                            padding: 0
+            MDBottomNavigationItem:
+                name: 'screen 3'
+                text: 'Status'
+                MDLabel:
+                    text: 'Status Window'
+                    theme_text_color: "Primary"
+                    halign: 'center'
+
+<LoginScreen>
+    MDFloatLayout:
+        MDLabel:
+            text: "Login"
+            pos_hint: {"center_y": .9}
+            font_style: "H3"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+        MDTextField:
+            id: email
+            hint_text: "username"
+            pos_hint: {"center_x": .5, "center_y": .6}
+            current_hint_text_color: 0, 0, 0, 1
+            size_hint_x: .8
+        MDTextField:
+            id: password
+            hint_text: "password"
+            pos_hint: {"center_x": .5, "center_y": .45}
+            current_hint_text_color: 0, 0, 0, 1
+            size_hint_x: .8
+            password: True
+
+        MDRaisedButton:
+            text: "login"
+            pos_hint: {"center_x": .5, "center_y": .1}
+            width: root.width - 500
+            on_release: app.verify(email.text, password.text)
+
+<ProfileScreen>
+    name: 'profile'
+    MDLabel:
+        text: 'Benvenuto'
+        halign: 'center'
